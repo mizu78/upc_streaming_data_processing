@@ -1,8 +1,10 @@
 import sys
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import explode
-from pyspark.sql.functions import split
+from pyspark.sql.functions import explode, split, asc, desc
+
+import os
+os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages org.apache.spark:spark-streaming-kafka-0-10_2.12:3.5.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 pyspark-shell'
 
 
 if __name__ == "__main__":
@@ -45,7 +47,7 @@ if __name__ == "__main__":
     )
 
     # Generate running word count
-    wordCounts = words.groupBy('word').count()
+    wordCounts = words.groupBy('word').count().orderBy(desc("count"), "word")
 
     # Start running the query that prints the running counts to the console
     query = wordCounts\
