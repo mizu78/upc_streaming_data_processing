@@ -27,11 +27,12 @@ if __name__ == "__main__":
         .readStream\
         .format("kafka")\
         .option("kafka.bootstrap.servers", bootstrapServers)\
-        .option("sasl_mechanism", 'SCRAM-SHA-256')\
-        .option("security_protocol", 'SASL_SSL')\
-        .option("sasl_plain_username", "your-username")\
-        .option("sasl_plain_password", "your-password")\
+        .option("kafka.sasl.mechanism", "SCRAM-SHA-256")\
+        .option("kafka.security.protocol", "SASL_SSL")\
+        .option("kafka.sasl.jaas.config", "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"YOUR-UPSTASH-USERNAME\" password=\"YOU-UPSTASH-PASSWORD\";")\
+        .option("startingOffsets", "earliest")\
         .option(subscribeType, topics)\
+        .option("auto.offset.reset", "earliest")\
         .load()\
         .selectExpr("CAST(value AS STRING)")
 
