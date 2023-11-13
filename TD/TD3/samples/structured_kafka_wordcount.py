@@ -52,7 +52,7 @@ if __name__ == "__main__":
     # Start running the query that prints the running counts to the console
     query = wordCounts\
         .writeStream\
-        .outputMode('complete')\
+        .outputMode('append')\
         .format('console')\
         .start()
 
