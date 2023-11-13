@@ -52,7 +52,7 @@ if __name__ == "__main__":
         .limit(10)
     
     query = streaming_count_df.writeStream.format("console")\
-        .outputMode('complete')\
+        .outputMode('append')\
         .option("truncate", False)\
         .trigger(processingTime="2 second")\
         .start()
