@@ -120,7 +120,7 @@ conda create -n kafka-<yourname> python=3.11
 conda activate kafka-<yourname>
 
 # Install the kafka-python package
-pip install confluent-python
+pip install confluent-kafka
 ```
 
 ### 1. Producer
